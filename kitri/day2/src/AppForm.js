@@ -139,11 +139,10 @@ function App1() {
         // Article 태그에 props(title, body) 전달 
         content = <Article title={title} body={body}></Article>;
 
-        contextControl = <>
-        <li><a href={'/update/'+id} onClick={event=>{ event.preventDefault(); setMode('UPDATE');}}>Update</a></li>
-            
         // id값 동일하지 않는 topics값 재생성해 해당 topics으로 setTopics 
         // => 특정 id를 결국 지우겠다는 소리
+        contextControl = <>
+        <li><a href={'/update/'+id} onClick={event=>{ event.preventDefault(); setMode('UPDATE');}}>Update</a></li>
         <li><input type="button" value="Delete" onClick={()=>{
                                                             const newTopics = []
 
