@@ -141,6 +141,9 @@ function App1() {
 
         contextControl = <>
         <li><a href={'/update/'+id} onClick={event=>{ event.preventDefault(); setMode('UPDATE');}}>Update</a></li>
+            
+        // id값 동일하지 않는 topics값 재생성해 해당 topics으로 setTopics 
+        // => 특정 id를 결국 지우겠다는 소리
         <li><input type="button" value="Delete" onClick={()=>{
                                                             const newTopics = []
 
@@ -172,6 +175,7 @@ function App1() {
     } else if(mode === 'UPDATE'){
         let title, body = null;
 
+        // 같은 id일 경우에만 값 재세팅
         for(let i=0; i<topics.length; i++){
             if(topics[i].id === id){
                 title = topics[i].title;
@@ -200,6 +204,15 @@ function App1() {
     return (
         <div>
             <Header title="WEB" onChangeMode={()=>{ setMode('WELCOME'); }}></Header>
+            
+            {/* 헷갈리지만 잘 알아두기
+            
+            // 1. props(= topics)값 들고 Nav함수로 이동
+            // 2. Nav함수 속 로직 실행
+            // 3. 호출한 Nav함수에서 onChangeMode를 호출   ex. onClick={event=>{props.onChangeMode(Number(event.target.id)); 
+            // 4. 호출한 함수에서 전달받은 id값으로 setId 진행
+            // 5. Header태그나 다른 태그들도 마찬가지
+            */}
             <Nav topics={topics} onChangeMode={(_id)=>{ setMode('READ'); setId(_id); }}></Nav>
             
             {content}
